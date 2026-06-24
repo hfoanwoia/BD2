@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: influencer-crm-admin
+    env: docker
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: INTEGRATION_MODE
+        value: mock
+      - key: DATABASE_PATH
+        value: /app/data/commerce.db
+    disk:
+      name: influencer-crm-data
+      mountPath: /app/data
+      sizeGB: 1
