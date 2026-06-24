@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.browser-profile/
+node_modules/
+data/*.db
+data/*.sqlite*
+*.zip
+.env
+.env.*
+.git/
