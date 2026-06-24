@@ -1,0 +1,102 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>达人分发建联 CRM</title>
+  <link rel="stylesheet" href="influencer.css?v=20260624-dashboard-reset-v1">
+</head>
+<body>
+  <section class="login-view" id="loginView">
+    <form class="login-card" id="loginForm">
+      <p class="eyebrow">CREATOR CRM</p>
+      <h1>达人分发建联分析</h1>
+      <label>账号<input id="loginUser" value="bd" autocomplete="username"></label>
+      <label>密码<input id="loginPass" value="bd123" type="password" autocomplete="current-password"></label>
+      <button class="btn primary" type="submit">登录工作台</button>
+      <small>演示账号：admin/admin123，manager/manager123，bd/bd123</small>
+    </form>
+  </section>
+
+  <div class="crm-shell hidden" id="appView">
+    <aside class="side">
+      <div class="brand"><b>达人 CRM</b><span id="userBadge">BD</span></div>
+      <nav>
+        <button class="nav active" data-view="dashboard">分析看板</button>
+        <button class="nav" data-view="influencers">达人管理</button>
+        <button class="nav" data-view="tasks">待办跟进</button>
+        <button class="nav" data-view="import">批量导入</button>
+      </nav>
+      <button class="logout" id="logoutBtn">退出登录</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">TODAY PIPELINE</p><h1 id="pageTitle">分析看板</h1></div>
+        <div class="top-actions"><input type="date" id="statDate"><button class="btn" id="refreshBtn">刷新</button></div>
+      </header>
+
+      <section class="view active" id="dashboardView">
+        <div class="metric-grid" id="metricGrid"></div>
+        <div class="work-grid">
+          <article class="panel"><div class="panel-head"><h2>转化漏斗</h2><span id="rateText"></span></div><div class="funnel" id="funnel"></div></article>
+          <article class="panel"><div class="panel-head"><h2>状态分布</h2></div><div class="status-bars" id="statusBars"></div></article>
+        </div>
+        <article class="panel"><div class="panel-head"><h2>人员转化对比</h2></div><div class="table-wrap"><table id="ownerTable"></table></div></article>
+      </section>
+
+      <section class="view" id="influencersView">
+        <div class="toolbar panel">
+          <input id="searchInput" placeholder="搜索账号、昵称、联系方式">
+          <select id="statusFilter"><option value="">全部状态</option></select>
+          <select id="ownerFilter"><option value="">全部负责人</option></select>
+          <button class="btn primary" id="newBtn">新增达人</button>
+          <button class="btn" id="exportBtn">导出 CSV</button>
+        </div>
+        <div class="split">
+          <article class="panel table-panel"><div class="table-wrap"><table id="influencerTable"></table></div></article>
+          <aside class="panel detail" id="detailPane"><div class="empty">选择一个达人查看跟进记录</div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="tasksView">
+        <div class="task-grid" id="taskGrid"></div>
+      </section>
+
+      <section class="view" id="importView">
+        <article class="panel import-panel">
+          <h2>CSV 批量导入</h2>
+          <p>字段：platform, account, nickname, category, followers, contact, owner, status, notes</p>
+          <label class="file-box"><input type="file" id="csvFile" accept=".csv,text/csv"><span>选择 CSV 文件</span><b id="fileName">未选择文件</b></label>
+          <button class="btn primary" id="importBtn">开始导入</button>
+          <pre class="template">platform,account,nickname,category,followers,contact,owner,status,notes
+快手,creator001,养生达人,养生茶,120000,wx:test,一线BD,已建联,首批名单</pre>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="modal">
+    <form class="modal-card" id="modalForm">
+      <button type="button" class="close" id="closeModal">×</button>
+      <h2>新增达人</h2>
+      <div class="form-grid">
+        <label>平台<select name="platform" required><option>抖音</option><option>快手</option><option>视频号</option></select></label>
+        <label>达人账号<input name="account" required></label>
+        <label>昵称<input name="nickname"></label>
+        <label>类目<select name="category"><option>养生茶</option><option>药食同源</option><option>初级农产品</option><option>特殊膳食</option><option>保健食品</option><option>普通食品</option></select></label>
+        <label>粉丝量<select name="followers"><option>5000以下</option><option>5k-1w</option><option>1w-5w</option><option>5w-10w</option><option>10w-20w</option><option>20w-50w</option><option>50w-100w</option><option>100w-300w</option><option>500w以上</option></select></label>
+        <label>联系方式<input name="contact"></label>
+        <label>负责人<select name="owner_id" id="ownerSelect"></select></label>
+        <label>状态<select name="status"><option>未建联</option><option>已建联</option><option>寄样</option><option>已出单</option><option>定期维护</option></select></label>
+      </div>
+      <label>主页链接<input name="profile_url"></label>
+      <label>备注<textarea name="notes"></textarea></label>
+      <button class="btn primary" type="submit">保存达人</button>
+    </form>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="influencer.js?v=20260624-dashboard-reset-v1"></script>
+</body>
+</html>
