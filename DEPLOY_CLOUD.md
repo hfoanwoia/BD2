@@ -43,3 +43,14 @@ uvicorn backend.app:app --host 0.0.0.0 --port $PORT
 - bd / bd123
 
 正式使用前建议修改默认账号密码。
+
+
+## 无银行卡演示部署
+
+如果 Render 提示需要付款信息，请使用当前 render.yaml 的 free 配置：
+
+- plan: free
+- DATABASE_PATH=/tmp/commerce.db
+- 不配置 disk
+
+注意：这是演示部署，服务重启后数据库可能丢失。正式多人长期使用时，需要换成持久化磁盘或 Postgres 数据库。
